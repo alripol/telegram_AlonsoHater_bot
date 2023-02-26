@@ -1,14 +1,15 @@
 const TelegramBot = require('node-telegram-bot-api');
-
-const token = '5824682629:AAEESg_yUlWXKIhHZ8hb0FGv9kBSr7rsLyI';
-const sourceChatId = '-1001658917150'; 
-const targetChatId = '-1001819375133'; 
-
-const bot = new TelegramBot(token, {polling: true});
+const token = '6180581287:AAG-FXxzuR2edg-zs-n2gzlqXuYYyOZRT34'; // Reemplaza TU_TOKEN con el token que te proporcionó BotFather
+const bot = new TelegramBot(token, { polling: true });
 
 bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
-  if (chatId === sourceChatId) {
-    bot.forwardMessage(targetChatId, chatId, msg.message_id);
-  }
+  let message = msg.text;
+  message = message.replace('Alonso', 'Manzana');
+  bot.sendMessage(msg.chat.id, message);
 });
+
+bot.on('polling_error', (error) => {
+  console.log(error);
+});
+
+console.log('Bot is running...');
